@@ -1,10 +1,3 @@
-package main
-
-import (
-	"fmt"
-	"sort"
-)
-
 func groupAnagrams(strs []string) [][]string {
 	anagramMap := make(map[string][]string)
 
@@ -27,15 +20,4 @@ func groupAnagrams(strs []string) [][]string {
 		result = append(result, group)
 	}
 	return result
-}
-
-func main() {
-	strs := []string{"eat","tea","tan","ate","nat","bat"}
-
-
-
-		fmt.Println(groupAnagrams(strs))
-
-    // output := isAnagram(s,t)
- 	// fmt.Println("Result: ", output)
 }

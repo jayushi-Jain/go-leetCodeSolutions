@@ -1,4 +1,4 @@
-func palindrome(str string){
+func palindrome(s string){
 	s = strings.ToLower(s)
 	s = strings.ReplaceAll(s," ","")
 

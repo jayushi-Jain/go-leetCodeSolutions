@@ -2,30 +2,49 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
-
-
 func main() {
-	numbers := []int{1,2,3,4}
-	target := 3
+	strs := []string{"neet", "code", "love", "you"}
+	var concatString strings.Builder
 
-	left := 0
-	right := len(numbers)-1
-
-	for left < right {
-		sum := numbers[left] + numbers[right]
-		if sum == target {
-			fmt.Println("num1: ", numbers[left])
-			fmt.Println("num2: ", numbers[right])
-			break
-		}else if sum < 0 {
-			left++
-		}else {
-			right--
-		}
+	for _, str := range strs {
+		concatString.WriteString(strconv.Itoa(len(str)))
+		concatString.WriteString("#")
+		concatString.WriteString(str)
 	}
 
-	
+	fmt.Println("Encoded string:", concatString.String())
+	stringToDecode := concatString.String()
+	i := 0
+	var result []string
+
+	for i < len(stringToDecode) {
+		j := i
+		for j < len(stringToDecode) && stringToDecode[j] != '#' {
+			j++
+		}
+
+		length, err := strconv.Atoi(stringToDecode[i:j])
+		if err != nil {
+			fmt.Println("Error decoding length:", err)
+			return
+		}
+
+		i = j + 1
+		if i+length > len(stringToDecode) {
+			fmt.Println("Error: not enough characters for the specified length")
+			return
+		}
+
+		str := stringToDecode[i : i+length]
+		fmt.Printf("Decoded string: %s\n", str)
+		result = append(result, str)
+		i += length
+	}
+
+	fmt.Println("Decoding completed successfully.", result)
 
 }
